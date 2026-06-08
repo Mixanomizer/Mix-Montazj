@@ -1,0 +1,1915 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>МИКС-монтаж — профессиональный монтаж и декор мероприятий</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Bebas+Neue&family=Jost:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #117d98;
+        --primary-dark: #0b5f73;
+        --primary-deeper: #0b3d4c;
+        --accent: #ff6b2b;
+        --accent-light: #ff8c52;
+        --light: #e8f6fa;
+        --white: #ffffff;
+        --dark: #0d1f26;
+        --gray: #8a9ea5;
+        --card-bg: #f0f9fc;
+        --font-main: "Jost", sans-serif;
+        --font-display: "Bebas Neue", sans-serif;
+        --font-deco: "Rubik Wet Paint", cursive;
+        --radius: 16px;
+        --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-main);
+        color: var(--dark);
+        background: var(--white);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* ===== SCROLLBAR ===== */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 3px;
+      }
+
+      /* ===== HEADER ===== */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 18px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition:
+          background var(--transition),
+          box-shadow var(--transition),
+          padding var(--transition);
+        background: transparent;
+      }
+
+      header.scrolled {
+        background: rgba(11, 30, 38, 0.96);
+        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+        padding: 12px 60px;
+        backdrop-filter: blur(12px);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo-icon svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-text {
+        font-family: var(--font-display);
+        font-size: 28px;
+        letter-spacing: 2px;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .logo-text span {
+        color: var(--accent);
+      }
+
+      nav {
+        display: flex;
+        gap: 36px;
+        align-items: center;
+      }
+
+      nav a {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition: color var(--transition);
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transition: transform var(--transition);
+        transform-origin: left;
+      }
+
+      nav a:hover {
+        color: var(--white);
+      }
+      nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-cta {
+        background: var(--accent);
+        color: var(--white) !important;
+        padding: 10px 22px;
+        border-radius: 50px;
+        font-weight: 600 !important;
+        transition:
+          background var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition) !important;
+      }
+
+      .nav-cta:hover {
+        background: var(--accent-light) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 107, 43, 0.4);
+      }
+
+      .nav-cta::after {
+        display: none !important;
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+
+      .burger span {
+        display: block;
+        width: 26px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+
+      /* ===== HERO ===== */
+      #hero {
+        min-height: 100vh;
+        max-height: fit-content;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.05);
+        transition: transform 8s ease-out;
+      }
+      .hero-bg.loaded {
+        transform: scale(1);
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          105deg,
+          rgba(10, 63, 82, 0.93) 0%,
+          rgba(17, 125, 152, 0.75) 55%,
+          rgba(17, 125, 152, 0.15) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3;
+        width: fit-content;
+        max-width: 1200px;
+        margin: 0 1vw;
+        padding: 70px 5vw 80px;
+        width: 100%;
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 107, 43, 0.2);
+        border: 1px solid rgba(255, 107, 43, 0.4);
+        color: var(--accent-light);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 28px;
+        animation: fadeInDown 0.8s ease both;
+      }
+
+      .hero-tag::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8);
+        }
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(72px, 10vw, 140px);
+        line-height: 0.9;
+        letter-spacing: 4px;
+        color: var(--white);
+        animation: fadeInUp 0.9s 0.2s ease both;
+      }
+
+      .hero-title .accent-line {
+        display: block;
+        color: var(--accent);
+        -webkit-text-stroke: 0px;
+      }
+
+      .hero-title .stroke-line {
+        display: block;
+        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3);
+        color: transparent;
+      }
+
+      .hero-sub {
+        font-size: clamp(16px, 2vw, 20px);
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 520px;
+        margin: 10px 0 48px;
+        font-weight: 300;
+        line-height: 1.7;
+        animation: fadeInUp 0.9s 0.4s ease both;
+      }
+
+      .hero-rotating-wrap {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        gap: 14px;
+        margin-bottom: 40px;
+        /* opacity: 0; */
+        animation: fadeUp 0.8s 0.9s forwards;
+      }
+
+      .hero-rotating-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.833);
+      }
+      .hero-rotating-word {
+        font-family: "Bebas Neue", sans-serif;
+        /* font-size: 1.8rem; */
+        font-size: clamp(20px, 5vw, 1.8em);
+        width: fit-content;
+        letter-spacing: 3px;
+        min-width: 240px;
+        transition:
+          opacity 0.4s,
+          transform 0.4s;
+        color: #00d4ff;
+      }
+      .hero-rotating-word.fade-out {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        animation: fadeInUp 0.9s 0.6s ease both;
+      }
+
+      .btn-primary {
+        justify-content: center;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--accent);
+        color: var(--white);
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition:
+          background var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition);
+        box-shadow: 0 8px 32px rgba(255, 107, 43, 0.35);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity var(--transition);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 48px rgba(255, 107, 43, 0.5);
+        background: #ff7a40;
+      }
+
+      .btn-primary:hover::before {
+        opacity: 1;
+      }
+
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: var(--white);
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-3px);
+      }
+
+      .hero-stats {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        gap: 48px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 60px 60px;
+        flex-wrap: wrap;
+        animation: fadeInUp 0.9s 0.8s ease both;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-num {
+        font-family: var(--font-display);
+        font-size: 52px;
+        color: var(--accent);
+        letter-spacing: 2px;
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      .hero-scroll {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: fadeIn 1s 1.2s ease both;
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 48px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.5)
+        );
+        animation: scrollLine 2s infinite;
+      }
+
+      @keyframes scrollLine {
+        0% {
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+        51% {
+          transform: scaleY(1);
+          transform-origin: bottom;
+        }
+        100% {
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* ===== SECTIONS ===== */
+      section {
+        padding: 100px 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(40px, 5vw, 64px);
+        letter-spacing: 2px;
+        line-height: 1;
+        color: var(--dark);
+        margin-bottom: 20px;
+      }
+
+      .section-title .primary {
+        color: var(--primary);
+      }
+
+      .section-sub {
+        font-size: 17px;
+        color: var(--gray);
+        max-width: 540px;
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* ===== ABOUT ===== */
+      #about {
+        background: var(--white);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .about-visual {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+      }
+
+      .about-img-main {
+        width: 100%;
+        height: 900px;
+        object-fit: cover;
+        border-radius: var(--radius);
+        display: block;
+      }
+
+      .about-badge {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        background: rgba(11, 30, 38, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(17, 125, 152, 0.3);
+        color: var(--white);
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 13px;
+      }
+
+      .about-badge strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 32px;
+        color: var(--accent);
+        letter-spacing: 1px;
+      }
+
+      .about-text-block h2 {
+        margin-bottom: 24px;
+      }
+
+      .about-text {
+        font-size: 16px;
+        color: #4a6470;
+        line-height: 1.8;
+        margin-bottom: 16px;
+        font-weight: 300;
+      }
+
+      .clients-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 32px;
+      }
+
+      .client-tag {
+        background: var(--light);
+        border: 1px solid rgba(17, 125, 152, 0.2);
+        color: var(--primary-dark);
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all var(--transition);
+      }
+
+      .client-tag:hover {
+        background: var(--primary);
+        color: var(--white);
+        border-color: var(--primary);
+      }
+
+      /* ===== SERVICES ===== */
+      #services {
+        background: var(--dark);
+      }
+
+      #services .section-title {
+        color: var(--white);
+      }
+      #services .section-sub {
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 60px;
+      }
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 32px;
+        transition: all var(--transition);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transition: transform var(--transition);
+        transform-origin: left;
+      }
+
+      .service-card:hover {
+        background: rgba(17, 125, 152, 0.1);
+        border-color: rgba(17, 125, 152, 0.3);
+        transform: translateY(-6px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      /* .service-icon {
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        transition: background var(--transition);
+      } */
+
+      .service-card:hover .service-icon {
+        background: linear-gradient(135deg, var(--accent), #ff8c52);
+      }
+
+      .service-card:hover .service-desc {
+        color: #ffffffdb;
+      }
+
+      .service-card:hover .service-title {
+        color: var(--accent-light);
+      }
+
+      .service-icon svg {
+        width: 26px;
+        height: 26px;
+        fill: white;
+      }
+
+      .service-title {
+        /* font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 10px;
+        line-height: 1.3; */
+        font-family: var(--font-deco);
+        font-size: 20px;
+        color: white;
+        font-weight: 400;
+        transition: color 1s;
+      }
+
+      /* .service-title.deco {
+        font-family: var(--font-deco);
+        font-size: 22px;
+        color: var(--accent-light);
+        font-weight: 400;
+      } */
+
+      .service-desc {
+        font-size: 14px;
+        color: #ffffff90;
+        line-height: 1.6;
+        font-weight: 450;
+      }
+
+      /* ===== PROJECTS ===== */
+      #projects {
+        background: var(--light);
+        overflow: hidden;
+      }
+
+      .projects-list {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+
+      .project-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .project-block.reverse {
+        direction: rtl;
+      }
+      .project-block.reverse > * {
+        direction: ltr;
+      }
+
+      .project-img-wrap {
+        border-radius: var(--radius);
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 4/3;
+      }
+
+      .project-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        display: block;
+      }
+
+      .project-img-wrap:hover .project-img {
+        transform: scale(1.05);
+      }
+
+      .project-img-overlay {
+        position: absolute;
+        inset: 0;
+      }
+
+      .project-num {
+        font-family: var(--font-display);
+        font-size: 80px;
+        color: rgba(17, 125, 152, 0.1);
+        line-height: 1;
+        margin-bottom: -20px;
+        letter-spacing: 2px;
+      }
+
+      .project-tag {
+        display: inline-block;
+        background: var(--primary);
+        color: var(--white);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 50px;
+        margin-bottom: 16px;
+      }
+
+      .project-title {
+        font-family: var(--font-display);
+        font-size: 36px;
+        letter-spacing: 1px;
+        color: var(--dark);
+        margin-bottom: 14px;
+        line-height: 1.1;
+      }
+
+      .project-desc {
+        font-size: 15px;
+        color: #5a7480;
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* ===== CONTACT ===== */
+      #contacts {
+        background: var(--primary-deeper);
+      }
+
+      #contacts .section-title {
+        color: var(--white);
+      }
+      #contacts .section-sub {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .contacts-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-top: 60px;
+      }
+
+      .contact-form {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius);
+        padding: 40px;
+        backdrop-filter: blur(8px);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .form-group label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 14px 18px;
+        color: var(--white);
+        font-family: var(--font-main);
+        font-size: 15px;
+        transition: all var(--transition);
+        outline: none;
+        width: 100%;
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary);
+        background: rgba(17, 125, 152, 0.1);
+        box-shadow: 0 0 0 3px rgba(17, 125, 152, 0.2);
+      }
+
+      .form-group input.error,
+      .form-group textarea.error {
+        border-color: #ff4444;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .form-submit {
+        margin-top: 8px;
+        width: 100%;
+        padding: 16px;
+        font-size: 15px;
+        font-family: var(--font-main);
+      }
+
+      .form-success {
+        display: none;
+        text-align: center;
+        padding: 24px;
+        background: rgba(17, 125, 152, 0.2);
+        border: 1px solid rgba(17, 125, 152, 0.4);
+        border-radius: 12px;
+        color: var(--white);
+        margin-top: 16px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        justify-content: center;
+      }
+
+      .contact-info-title {
+        font-family: var(--font-display);
+        font-size: 28px;
+        letter-spacing: 1px;
+        color: var(--white);
+        margin-bottom: 8px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .contact-item-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(17, 125, 152, 0.25);
+        border: 1px solid rgba(17, 125, 152, 0.4);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .contact-item-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--primary);
+        fill: none;
+      }
+
+      .contact-item-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 4px;
+      }
+
+      .contact-item-val {
+        font-size: 15px;
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: var(--dark);
+        padding: 32px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 22px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .footer-logo span {
+        color: var(--accent);
+        opacity: 0.6;
+      }
+
+      .footer-copy {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.25);
+        text-align: center;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-links a {
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.3);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* ===== MOBILE NAV ===== */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(11, 20, 26, 0.98);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+      }
+
+      .mobile-nav.open {
+        display: flex;
+      }
+
+      .mobile-nav a {
+        font-family: var(--font-display);
+        font-size: 36px;
+        letter-spacing: 4px;
+        color: var(--white);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+
+      .mobile-nav a:hover {
+        color: var(--accent);
+      }
+
+      .mobile-nav-close {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      /* ===== SVG PLACEHOLDERS ===== */
+      .svg-placeholder {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .images {
+        border-radius: 16px 10px;
+        height: 50dvi;
+        display: flex;
+        align-self: center;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1024px) {
+        section {
+          padding: 80px 40px;
+        }
+        header {
+          padding: 16px 40px;
+        }
+        header.scrolled {
+          padding: 12px 40px;
+        }
+        footer {
+          padding: 28px 40px;
+        }
+        .about-grid {
+          gap: 48px;
+        }
+        .project-block {
+          gap: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        section {
+          padding: 64px 24px;
+        }
+        header {
+          padding: 16px 24px;
+        }
+        header.scrolled {
+          padding: 12px 24px;
+        }
+        footer {
+          padding: 24px;
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+
+        nav {
+          display: none;
+        }
+        .burger {
+          display: flex;
+        }
+
+        .images {
+          height: auto;
+          width: 100%;
+        }
+
+        .hero-content {
+          padding: 100px 20px 40px;
+        }
+        .hero-stats {
+          padding: 0 20px 48px;
+          gap: 32px;
+        }
+        .stat-num {
+          font-size: 40px;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .about-img-main {
+          height: 320px;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-block,
+        .project-block.reverse {
+          grid-template-columns: 1fr;
+          direction: ltr;
+          gap: 24px;
+        }
+        .project-block.reverse > * {
+          direction: ltr;
+        }
+
+        .contacts-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .footer-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+      <a href="#about" onclick="closeMobileNav()">О нас</a>
+      <a href="#services" onclick="closeMobileNav()">Услуги</a>
+      <a href="#projects" onclick="closeMobileNav()">Проекты</a>
+      <a href="#contacts" onclick="closeMobileNav()">Контакты</a>
+    </div>
+
+    <!-- HEADER -->
+    <header id="mainHeader">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="2" y="18" width="36" height="5" rx="2.5" fill="#FF6B2B" />
+            <rect x="8" y="8" width="5" height="24" rx="2.5" fill="#117D98" />
+            <rect x="27" y="8" width="5" height="24" rx="2.5" fill="#117D98" />
+            <circle cx="10.5" cy="8" r="3" fill="#FF6B2B" />
+            <circle cx="29.5" cy="32" r="3" fill="#FF6B2B" />
+            <rect
+              x="14"
+              y="11"
+              width="12"
+              height="3"
+              rx="1.5"
+              fill="rgba(255,255,255,0.4)"
+            />
+            <rect
+              x="14"
+              y="26"
+              width="12"
+              height="3"
+              rx="1.5"
+              fill="rgba(255,255,255,0.4)"
+            />
+          </svg>
+        </div>
+        <div class="logo-text">МИКС<span>-</span>монтаж</div>
+      </a>
+      <nav>
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contacts" class="nav-cta">Заказать</a>
+      </nav>
+      <button
+        class="burger"
+        id="burgerBtn"
+        onclick="openMobileNav()"
+        aria-label="Открыть меню"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-tag">Профессиональный монтаж мероприятий</div>
+        <h1 class="hero-title">
+          <span class="accent-line">МИКС</span>
+          <span>монтаж</span>
+        </h1>
+        <p class="hero-sub">Строим пространства, которые запоминаются.</p>
+
+        <div class="hero-rotating-wrap">
+          <span class="hero-rotating-label">Мы работаем</span>
+          <span class="hero-rotating-word" id="rotatingWord">НАДЁЖНО</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contacts" class="btn-primary">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            Заказать услугу
+          </a>
+          <a href="#services" class="btn-outline"> Наши услуги </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div
+            class="about-visual"
+            data-aos="fade-right"
+            data-aos-duration="900"
+          >
+            <img
+              class="images"
+              src="heart.jpg"
+              alt="Картинка как мы вас любим"
+            />
+          </div>
+
+          <div
+            class="about-text-block"
+            data-aos="fade-left"
+            data-aos-duration="900"
+            data-aos-delay="150"
+          >
+            <div class="section-label">О компании</div>
+            <h2 class="section-title">
+              Надёжный партнёр<br /><span class="primary">в монтаже</span>
+            </h2>
+            <p class="about-text">
+              «МИКС-монтаж» — команда профессионалов, специализирующихся на
+              монтаже и декорировании коммерческих мероприятий любого масштаба.
+            </p>
+            <p class="about-text">
+              В нашем портфеле — успешные проекты построенные для ведущих
+              российскими компаний:
+              <strong
+                >Сбер, Самолет, Автору, Самокат, Naumen, Золотое Яблоко, Точка
+                Банк</strong
+              >. Мы строили стенды для крупнейших отраслевых выставок —
+              <strong
+                >TechnoBuild, Иннопром, HR Форум, Автодороги России</strong
+              >
+              — обеспечивая безупречный результат в жёстких временных рамках.
+            </p>
+            <p class="about-text">
+              Наш приоритет — точность исполнения, соблюдение сроков и высокие
+              стандарты качества на каждом этапе работ.
+            </p>
+            <div class="clients-grid">
+              <span class="client-tag">Сбер</span>
+              <span class="client-tag">Самолет</span>
+              <span class="client-tag">Автору</span>
+              <span class="client-tag">Самокат</span>
+              <span class="client-tag">Naumen</span>
+              <span class="client-tag">Золотое Яблоко</span>
+              <span class="client-tag">Точка Банк</span>
+              <span class="client-tag">TechnoBuild</span>
+              <span class="client-tag">Иннопром</span>
+              <span class="client-tag">HR Форум</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div data-aos="fade-up">
+          <div class="section-label">Что мы делаем</div>
+          <h2 class="section-title" style="color: white">
+            Наши <span style="color: var(--accent)">услуги</span>
+          </h2>
+          <p class="section-sub">
+            Полный цикл монтажных и декоративных работ для мероприятий любого
+            формата и масштаба.
+          </p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title deco">Монтаж коммерческого декора</div>
+            <p class="service-desc">
+              Профессиональный монтаж декоративных элементов для торговых и
+              коммерческих пространств.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="60">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title">Постройка стендов для мероприятий</div>
+            <p class="service-desc">
+              Возведение выставочных стендов от компактных решений до
+              многоуровневых конструкций.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title deco">Монтаж фотозон</div>
+            <p class="service-desc">
+              Создание и монтаж эффектных фотозон: арки, панно, тематические
+              конструкции с декоративной отделкой под запрос заказчика.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title">Монтаж баннеров</div>
+            <p class="service-desc">
+              Натяжка и крепление баннеров, монтаж пресс-воллов и пресс-стен —
+              чёткий результат к старту события.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title">Монтаж входных групп</div>
+            <p class="service-desc">
+              Оформление и монтаж входных арок, порталов, зон welcome — создаём
+              первое впечатление, которое задаёт тон всему мероприятию.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title deco">Постройка подиума</div>
+            <p class="service-desc">
+              Возведение подиумов, помостов и сценических платформ: расчёт
+              нагрузок, сборка конструкций, финишная обшивка.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="60">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title">Оформление сцены</div>
+            <p class="service-desc">
+              Обшивка и декорирование "юбки" сцены, установка каше под
+              led-экраны, установка и декорирование ступеней, отделка
+              поверхностей.
+            </p>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-icon">
+              <!-- <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg> -->
+            </div>
+            <div class="service-title deco">Покраска</div>
+            <p class="service-desc">
+              Покраска конструкций, поверхностей и декоративных элементов в
+              заданные корпоративные цвета — ровное покрытие, стойкий результат.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div data-aos="fade-up">
+          <div class="section-label">Портфолио</div>
+          <h2 class="section-title">
+            Наши <span class="primary">проекты</span>
+          </h2>
+          <p class="section-sub">
+            Примеры реализованных работ по ключевым направлениям нашей
+            деятельности.
+          </p>
+        </div>
+
+        <div class="projects-list">
+          <!-- Project 1 -->
+          <div
+            class="project-block reverse"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
+            <div>
+              <div class="project-num">01</div>
+              <div class="project-tag">Выставочный стенд</div>
+              <h3 class="project-title">ПОСТРОЙКА СТЕНДА ДЛЯ ВЫСТАВКИ</h3>
+              <p class="project-desc">
+                Возведение выставочного стенда для крупной отраслевой выставки:
+                каркас дерева, обшивка панелями и банерами с фирменными
+                изображениями, монтаж подсветки и фирменного декора.
+              </p>
+            </div>
+            <div class="project-img-wrap">
+              <div class="project-img-overlay">
+                <img
+                  class="project-img"
+                  src="stend.png"
+                  alt="Красивый стенд"
+                  width="110%"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 (reversed) -->
+          <div class="project-block" data-aos="fade-up" data-aos-duration="800">
+            <div>
+              <div class="project-num">02</div>
+              <div class="project-tag">Пресс-волл</div>
+              <h3 class="project-title">УСТАНОВКА ПРЕСС-ВОЛЛА</h3>
+              <p class="project-desc">
+                Монтаж пресс-вола для деловогo форума: сборка деревянной рамы,
+                натяжка брендированного полотна, точная выверка вертикали и
+                горизонтали.
+              </p>
+            </div>
+
+            <div class="project-img-wrap">
+              <img
+                class="project-img"
+                src="press-wall.png"
+                width="100%"
+                alt=""
+              />
+              <div class="project-img-overlay"></div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="project-block reverse"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
+            <div>
+              <div class="project-num">03</div>
+              <div class="project-tag">Фотозона</div>
+              <h3 class="project-title">МОНТАЖ ДЕКОРАТИВНОЙ ФОТОЗОНЫ</h3>
+              <p class="project-desc">
+                Изготовление и монтаж тематической фотозоны для корпоративного
+                события: арочная конструкция с цветочным декором, подсветкой и
+                фирменным оформлением.
+              </p>
+            </div>
+            <div class="project-img-wrap">
+              <div class="project-img-overlay">
+                <img
+                  class="project-img"
+                  src="photo_zone.png"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 (reversed) -->
+          <div class="project-block" data-aos="fade-up" data-aos-duration="800">
+            <div>
+              <div class="project-num">04</div>
+              <div class="project-tag">Сцена и подиум</div>
+              <h3 class="project-title">МОНТАЖ СЦЕНЫ С ОФОРМЛЕНИЕМ</h3>
+              <p class="project-desc">
+                Оформление сценического пространства: монтаж рауса (юбки) сцены,
+                монтаж каше под экраны, установка ступеней, отделка
+                поверхностей. Результат — профессиональная площадка, готовая к
+                выступлениям и трансляции.
+              </p>
+            </div>
+            <div class="project-img-wrap">
+              <img class="project-img" src="scena.png" width="100%" alt="" />
+              <div class="project-img-overlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="contacts">
+      <div class="container">
+        <div data-aos="fade-up">
+          <div class="section-label">Свяжитесь с нами</div>
+          <h2 class="section-title" style="color: white">
+            Обсудим <span style="color: var(--accent)">ваш проект</span>
+          </h2>
+          <p class="section-sub">
+            Оставьте заявку — ответим в течение рабочего дня и предложим решение
+            под ваши задачи.
+          </p>
+        </div>
+
+        <div class="contacts-grid">
+          <div
+            class="contact-form"
+            data-aos="fade-right"
+            data-aos-duration="800"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Имя</label>
+                <input
+                  type="text"
+                  id="fname"
+                  name="name"
+                  placeholder="Иван Иванов"
+                />
+              </div>
+              <div class="form-group">
+                <label for="fphone">Телефон</label>
+                <input
+                  type="tel"
+                  id="fphone"
+                  name="phone"
+                  placeholder="+7 (___) ___-__-__"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="femail">Email</label>
+              <input
+                type="email"
+                id="femail"
+                name="email"
+                placeholder="mail@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="fmessage">Сообщение</label>
+              <textarea
+                id="fmessage"
+                name="message"
+                placeholder="Опишите ваш проект или задачу..."
+              ></textarea>
+            </div>
+            <button class="btn-primary form-submit" onclick="submitForm()">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              Отправить заявку
+            </button>
+            <div class="form-success" id="formSuccess">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4ADE80"
+                stroke-width="2"
+                style="margin-bottom: 8px"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <p style="font-weight: 600; color: white; margin-bottom: 4px">
+                Заявка отправлена!
+              </p>
+              <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6)">
+                Мы свяжемся с вами в ближайшее время.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="contact-info"
+            data-aos="fade-left"
+            data-aos-duration="800"
+            data-aos-delay="150"
+          >
+            <div>
+              <div class="contact-info-title">РЕКВИЗИТЫ</div>
+              <p
+                style="
+                  font-size: 14px;
+                  color: rgba(255, 255, 255, 0.4);
+                  font-weight: 300;
+                  line-height: 1.6;
+                "
+              >
+                Оставьте заявку через форму — или свяжитесь с нами напрямую.
+              </p>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.12-1.12a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Телефон</div>
+                <div class="contact-item-val">+7 (999) 123-45-67 (пример)</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8">
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Email</div>
+                <div class="contact-item-val">
+                  info@miks-montazh.ru (пример)
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Адрес</div>
+                <div class="contact-item-val">
+                  г. Екатеринбург, ул. Примерная, д. 1 (пример)
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Режим работы</div>
+                <div class="contact-item-val">Пн–Пт: 9:00–19:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">МИКС<span>-</span>монтаж</div>
+      <div class="footer-copy">© 2025 МИКС-монтаж. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Init AOS
+      AOS.init({ once: true, offset: 60, easing: "ease-out-cubic" });
+
+      // Header scroll effect
+      const header = document.getElementById("mainHeader");
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 100) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        },
+        { passive: true },
+      );
+
+      // Mobile nav
+      function openMobileNav() {
+        document.getElementById("mobileNav").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* --- Анимированные слова в Hero --- */
+      const words = ["НАДЁЖНО", "СОВРЕМЕННО", "ТОЧНО", "БЫСТРО"];
+      let wordIdx = 0;
+      const rotatingEl = document.getElementById("rotatingWord");
+      setInterval(() => {
+        rotatingEl.classList.add("fade-out");
+        setTimeout(() => {
+          wordIdx = (wordIdx + 1) % words.length;
+          rotatingEl.textContent = words[wordIdx];
+          rotatingEl.classList.remove("fade-out");
+        }, 400);
+      }, 2400);
+
+      // Form validation & submit
+      function submitForm() {
+        const name = document.getElementById("fname");
+        const phone = document.getElementById("fphone");
+        const email = document.getElementById("femail");
+        const message = document.getElementById("fmessage");
+        let valid = true;
+
+        [name, phone, email, message].forEach((f) =>
+          f.classList.remove("error"),
+        );
+
+        if (!name.value.trim()) {
+          name.classList.add("error");
+          valid = false;
+        }
+        if (!phone.value.trim()) {
+          phone.classList.add("error");
+          valid = false;
+        }
+        if (!email.value.trim() || !email.value.includes("@")) {
+          email.classList.add("error");
+          valid = false;
+        }
+        if (!message.value.trim()) {
+          message.classList.add("error");
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        const success = document.getElementById("formSuccess");
+        success.style.display = "block";
+        name.value = "";
+        phone.value = "";
+        email.value = "";
+        message.value = "";
+
+        setTimeout(() => {
+          success.style.display = "none";
+        }, 5000);
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const target = document.querySelector(a.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
